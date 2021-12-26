@@ -22,7 +22,7 @@ const refreshAccessToken = async (token) => {
 
     return {
       ...token,
-      error: 'refresh access token error',
+      error: 'RefreshActionTokenError',
     };
   }
 };
