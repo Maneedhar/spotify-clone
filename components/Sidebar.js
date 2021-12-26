@@ -1,3 +1,6 @@
+import { signOut, useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import {
   HeartIcon,
   HomeIcon,
@@ -6,16 +9,14 @@ import {
   RssIcon,
   SearchIcon,
 } from '@heroicons/react/outline';
-import { signOut, useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
 import useSpotify from '../hooks/useSpotify';
+import { playlistIdState } from '../atom/playlistatom';
 
 const Sidebar = () => {
   const spotifyApi = useSpotify();
   const { data: session } = useSession();
   const [playlists, setPlaylists] = useState([]);
-  const [playlistId, setPlaylistId] = useState(null);
-  console.log('Sidebar ~ playlistId', playlistId);
+  const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
